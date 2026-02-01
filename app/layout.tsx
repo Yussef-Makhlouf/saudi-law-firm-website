@@ -10,36 +10,59 @@ const _ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   variable: '--font-sans',
 });
 
+import { siteConfig } from '@/lib/site-config'
+
 export const metadata: Metadata = {
-  title: 'Legal Counsel | Modern Law Practice in Riyadh',
-  description: 'Premium legal services for individuals and businesses in Saudi Arabia. Specializing in criminal, labor, commercial, and investment law.',
-  generator: 'v0.app',
-  metadataBase: new URL('https://legal-counsel.com'),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: ['محامي', 'قانون', 'استشارات قانونية', 'السعودية', 'الرياض', 'محامي شركات', 'محامي جنائي'],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: 'website',
     locale: 'ar_SA',
-    url: 'https://legal-counsel.com',
-    title: 'Legal Counsel | Modern Law Practice',
-    description: 'Premium legal services in Riyadh, Saudi Arabia',
-  },
-  icons: {
-    icon: [
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/og-image.jpg', // We should make sure this exists or use a default
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
       },
     ],
-    apple: '/apple-icon.png',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
 }
+
+import { JsonLd } from '@/components/json-ld'
 
 export default function RootLayout({
   children,
@@ -49,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={`${_ibmPlexSansArabic.className} font-sans antialiased`}>
+        <JsonLd />
         {children}
         <Analytics />
       </body>

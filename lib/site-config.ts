@@ -1,6 +1,7 @@
 export const siteConfig = {
     name: 'المحامي فلان الفلاني', // Placeholder, user can update name
     description: 'محام قانوني معتمد متخصص في الخدمات القانونية المتقدمة للأفراد والشركات. معتمد من وزارة العدل بخبرة عملية واسعة.',
+    url: 'https://legal-counsel.com',
     contact: {
         phone: '+966500152437',
         whatsapp: '966500152437', // format for wa.me
